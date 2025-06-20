@@ -13,9 +13,12 @@
     "@headlessui/react": "^2.2.0",
     "@stripe/mcp": "^0.2.1",
     "@stripe/stripe-js": "^5.5.0",
-    "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/supabase-js": "^2.47.10",
-    "@types/stripe": "^8.0.416",
+    "@tanstack/react-query": "^5.80.10",
+    "@trpc/client": "^11.4.2",
+    "@trpc/next": "^11.4.2",
+    "@trpc/react-query": "^11.4.2",
+    "@trpc/server": "^11.4.2",
     "@vercel/analytics": "^1.4.1",
     "axios": "^1.7.9",
     "framer-motion": "^12.4.3",
@@ -44,5 +47,6 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac"
 }

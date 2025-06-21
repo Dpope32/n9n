@@ -9,7 +9,6 @@ import {
   Zap,
   GitBranch,
   Settings,
-  Users,
   ArrowRight,
   ExternalLink
 } from 'lucide-react';
@@ -246,7 +245,7 @@ export default function DocsPage() {
                 title: "Node Configuration",
                 description: "AI-powered assistance for complex node setups and integrations"
               }
-            ].map((feature, index) => (
+            ].map((feature) => (
               <div key={feature.title} className="text-center">
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-[#5b64a2]/20 rounded-lg mb-4">
                   <span className="text-[#5b64a2]">{feature.icon}</span>

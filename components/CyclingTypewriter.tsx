@@ -12,8 +12,8 @@ interface CyclingTypewriterProps {
 
 export function CyclingTypewriter({ 
   examples, 
-  typingSpeed = 50,
-  readingTime = 3000,
+  typingSpeed = 40,
+  readingTime = 6500,
   className = "" 
 }: CyclingTypewriterProps) {
   const [currentIndex, setCurrentIndex] = useState(0);

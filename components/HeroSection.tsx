@@ -11,11 +11,11 @@ import { useRouter } from 'next/navigation';
 
 const aiExamples = [
   "I'll help you build a workflow that processes customer emails, extracts sentiment, and automatically routes them to the right team member based on urgency and topic.",
-  "I understand you're having an issue with your headers in the Get HTTP Node. Let me fix that authentication configuration and add proper error handling for you.",
+  "I understand you&apos;re having an issue with your headers in the Get HTTP Node. Let me fix that authentication configuration and add proper error handling for you.",
   "Sounds great, I will build you an automated workflow to run on Sunday nights to backup to S3 and send you an email with the results.",
-  "Perfect! I'll create a real estate workflow that monitors new MLS listings, filters by your criteria, sends property details to your CRM, and automatically schedules viewing appointments with potential clients.",
+  "Perfect! I&apos;ll create a real estate workflow that monitors new MLS listings, filters by your criteria, sends property details to your CRM, and automatically schedules viewing appointments with potential clients.",
   "I see the issue - your JSON parsing is failing because the webhook data structure changed. Let me update the Set node to handle the nested objects properly and add data validation to prevent future breaks.",
-  "I'll build you an e-commerce workflow that monitors inventory levels, automatically reorders stock when quantities drop below threshold, updates your accounting system, and sends Slack notifications to your team."
+  "I&apos;ll build you an e-commerce workflow that monitors inventory levels, automatically reorders stock when quantities drop below threshold, updates your accounting system, and sends Slack notifications to your team."
 ];
 
 export function HeroSection() {
@@ -28,7 +28,7 @@ export function HeroSection() {
         <div className="relative max-w-7xl mx-auto w-full">
           {/* Background Container with Image */}
           <div className="relative rounded-3xl overflow-hidden">
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 ">
               <Image
                 src="/interesting.png"
                 alt="Background"
@@ -39,12 +39,12 @@ export function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a]/60 via-[#1a1a1a]/50 to-[#1a1a1a]/70" />
             </div>
             
-            <div className="relative px-8 py-16 sm:px-16 sm:py-24 lg:px-20 lg:py-32 text-center">
+            <div className="relative px-8 py-8 sm:px-16 sm:py-24 lg:px-20 lg:py-24 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="space-y-6"
           >
             {/* Badge moved back to top */}
             <div className="inline-flex items-center px-4 py-2 bg-[#5b64a2]/20 border border-[#5b64a2]/30 rounded-full text-[#5b64a2] font-medium backdrop-blur-sm">
@@ -110,7 +110,7 @@ export function HeroSection() {
             </div>
 
             {/* Updated Stats for Freemium Model */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-16 max-w-3xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-4 max-w-3xl mx-auto">
               <div className="text-center space-y-2">
                 <div className="text-3xl font-bold text-[#5b64a2]">10x</div>
                 <div className="text-gray-400">Faster Workflow Building</div>
@@ -126,7 +126,7 @@ export function HeroSection() {
             </div>
 
             {/* Freemium Value Proposition */}
-            <div className="pt-8">
+            <div className="pb-0 pt-0">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -150,9 +150,9 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-20"
+            className="mt-6"
           >
-            <div className="relative max-w-7xl mx-auto">
+            <div className="relative max-w-7xl mx-auto pt-10">
               <div className="bg-[#0f0f0f] rounded-2xl p-8 shadow-2xl border border-gray-800 min-w-[800px] w-full max-w-[1000px] mx-auto">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex space-x-2">
@@ -166,7 +166,7 @@ export function HeroSection() {
                   </div>
                 </div>
                 
-                <div className="space-y-4">
+                <div className="space-y-1">
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-[#5b64a2] rounded-full animate-pulse"></div>
                     <span className="text-[#5b64a2] font-mono">AI Assistant:</span>
@@ -174,8 +174,6 @@ export function HeroSection() {
                   <div className="min-h-[120px] flex items-start">
                     <CyclingTypewriter 
                       examples={aiExamples}
-                      typingSpeed={30}
-                      readingTime={7500}
                       className="text-green-400 font-mono text-lg leading-relaxed"
                     />
                   </div>

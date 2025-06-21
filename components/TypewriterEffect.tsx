@@ -5,7 +5,7 @@ interface TypewriterEffectProps {
   delay?: number;
 }
 
-export const TypewriterEffect = ({ text, delay = 50 }: TypewriterEffectProps) => {
+export const TypewriterEffect = ({ text, delay = 35 }: TypewriterEffectProps) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
 

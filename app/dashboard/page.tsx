@@ -7,8 +7,6 @@ import { useSubscription } from '@/hooks/useSubscription';
 import { useTrialStatus } from '@/hooks/useTrialStatus';
 import { motion } from 'framer-motion';
 import { 
-  BarChart3, 
-  Users, 
   Zap, 
   Settings,
   PlusCircle,

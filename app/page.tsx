@@ -1,7 +1,5 @@
 "use client";
 
-import { useAuth } from '@/contexts/AuthContext';
-import { useTrialStatus } from '@/hooks/useTrialStatus';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { Zap, Code, Workflow, Users, Cloud, Star } from 'lucide-react';
@@ -10,8 +8,6 @@ import { PricingSection } from '@/components/PricingSection';
 import { HeroSection } from '@/components/HeroSection';
 
 export default function LandingPage() {
-  const { user } = useAuth();
-  const { isInTrial, trialEndTime } = useTrialStatus();
   const router = useRouter();
 
   return (

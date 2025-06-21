@@ -9,7 +9,6 @@ import { AccountManagement } from '@/components/AccountManagement';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Suspense } from 'react';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import { StripeBuyButton } from '@/components/StripeBuyButton';
 import { useTrialStatus } from '@/hooks/useTrialStatus';
 // import { PricingSection } from '@/components/PricingSection';
 // import { StripeBuyButton } from '@/components/StripeBuyButton';

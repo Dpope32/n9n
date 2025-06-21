@@ -176,7 +176,7 @@ export default function Dashboard() {
               <h1 className="text-2xl font-bold text-white">
                 N9N Dashboard
               </h1>
-              <p className="text-gray-400 mt-1">Welcome back! Here's what's happening with your workflows.</p>
+              <p className="text-gray-400 mt-1">Welcome back! Here&apos;s what&apos;s happening with your workflows.</p>
             </div>
             <div className="flex items-center space-x-4">
               <div className="bg-[#5b64a2]/20 px-3 py-1 rounded-full border border-[#5b64a2]/30">

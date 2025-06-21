@@ -19,7 +19,7 @@ export async function GET() {
 
     // Check if any service is unhealthy
     const unhealthyServices = Object.entries(checks.services)
-      .filter(([_, status]) => status !== 'healthy')
+      .filter(([, status]) => status !== 'healthy')
       .map(([service]) => service);
 
     if (unhealthyServices.length > 0) {

@@ -116,7 +116,7 @@ export default function LandingPage() {
               {
                 icon: <Cloud className="w-6 h-6" />,
                 title: "Self-Hosted or Cloud",
-                description: "Works with any n8n instance - your self-hosted setup or n8n Cloud. They don't lock you in, why should we?"
+                description: "Works with any n8n instance - your self-hosted setup or n8n Cloud. They don&apos;t lock you in, why should we?"
               },
               {
                 icon: <Workflow className="w-6 h-6" />,

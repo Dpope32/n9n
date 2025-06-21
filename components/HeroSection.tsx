@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Workflow, ArrowRight } from 'lucide-react';
-import { FaChrome } from 'react-icons/fa6';
+import { Sparkles, Workflow, ArrowRight, FileText } from 'lucide-react';
+import { FaChrome, FaDocker } from 'react-icons/fa6';
 import Image from 'next/image';
 import { CyclingTypewriter } from '@/components/CyclingTypewriter';
 import { VideoModal } from '@/components/VideoModal';
+import { useRouter } from 'next/navigation';
 
 const aiExamples = [
   "I'll help you build a workflow that processes customer emails, extracts sentiment, and automatically routes them to the right team member based on urgency and topic.",
@@ -16,20 +17,21 @@ const aiExamples = [
 
 export function HeroSection() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <>
       <div id="overview" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#1a1a1a]">
-        {/* Background Image - FIXED: More natural full-screen positioning with subtle visibility */}
+        {/* Background Image - FIXED: Made more visible again */}
         <div className="absolute inset-0">
           <Image
             src="/interesting.png"
             alt="Background"
             fill
-            className="object-cover opacity-10"
+            className="object-cover opacity-20"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a]/95 via-[#1a1a1a]/85 to-[#1a1a1a]/95" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a]/90 via-[#1a1a1a]/80 to-[#1a1a1a]/90" />
         </div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -39,6 +41,12 @@ export function HeroSection() {
             transition={{ duration: 0.8 }}
             className="space-y-8"
           >
+            {/* Badge moved back to top */}
+            <div className="inline-flex items-center px-4 py-2 bg-[#5b64a2]/20 border border-[#5b64a2]/30 rounded-full text-[#5b64a2] font-medium backdrop-blur-sm">
+              <Sparkles className="w-4 h-4 mr-2" />
+              The Cursor for n8n
+            </div>
+
             {/* Main Heading */}
             <div className="space-y-4">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight">
@@ -47,12 +55,12 @@ export function HeroSection() {
               </h1>
             </div>
 
-            {/* Subtitle */}
+            {/* Subtitle - Updated for freemium model */}
             <p className="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
               Integrate AI directly into n8n workflows. Get intelligent assistance to debug, optimize, and create automations beyond your imagination.
             </p>
 
-            {/* CTA Buttons */}
+            {/* Primary CTA Buttons - Updated with Docker option */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
               <motion.button
                 whileHover={{ scale: 1.02 }}
@@ -66,23 +74,37 @@ export function HeroSection() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => setIsVideoModalOpen(true)}
-                className="flex items-center px-8 py-4 bg-transparent border-2 border-gray-600 hover:border-[#5b64a2] text-white rounded-lg font-semibold text-lg transition-all duration-300"
+                className="flex items-center px-8 py-4 bg-[#2563eb] hover:bg-[#1d4ed8] text-white rounded-lg font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
               >
-                Watch Demo
-                <ArrowRight className="ml-3 text-xl" />
+                <FaDocker className="mr-3 text-xl" />
+                Self-Host with Docker
               </motion.button>
             </div>
 
-            {/* Badge - moved below buttons */}
-            <div className="flex justify-center pt-6">
-              <div className="inline-flex items-center px-4 py-2 bg-[#5b64a2]/20 border border-[#5b64a2]/30 rounded-full text-[#5b64a2] font-medium backdrop-blur-sm">
-                <Sparkles className="w-4 h-4 mr-2" />
-                The Cursor for n8n
-              </div>
+            {/* Secondary Actions - Watch Demo + Docs */}
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center pt-4">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setIsVideoModalOpen(true)}
+                className="flex items-center px-6 py-3 bg-transparent border-2 border-gray-600 hover:border-[#5b64a2] text-white rounded-lg font-medium transition-all duration-300"
+              >
+                Watch Demo
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => router.push('/docs')}
+                className="flex items-center px-6 py-3 bg-transparent border-2 border-gray-600 hover:border-[#5b64a2] text-white rounded-lg font-medium transition-all duration-300"
+              >
+                <FileText className="mr-2 w-4 h-4" />
+                Documentation
+              </motion.button>
             </div>
 
-            {/* Stats */}
+            {/* Updated Stats for Freemium Model */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-16 max-w-3xl mx-auto">
               <div className="text-center space-y-2">
                 <div className="text-3xl font-bold text-[#5b64a2]">10x</div>
@@ -93,9 +115,28 @@ export function HeroSection() {
                 <div className="text-gray-400">Supported Nodes</div>
               </div>
               <div className="text-center space-y-2">
-                <div className="text-3xl font-bold text-[#5b64a2]">AI</div>
-                <div className="text-gray-400">Powered Assistant</div>
+                <div className="text-3xl font-bold text-[#5b64a2]">Free</div>
+                <div className="text-gray-400">Self-Hosted Option</div>
               </div>
+            </div>
+
+            {/* Freemium Value Proposition */}
+            <div className="pt-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="inline-flex items-center space-x-8 text-sm text-gray-400"
+              >
+                <div className="flex items-center">
+                  <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                  Free: 3 workflows, 50 AI sessions/month
+                </div>
+                <div className="flex items-center">
+                  <div className="w-2 h-2 bg-[#5b64a2] rounded-full mr-2"></div>
+                  Pro: Unlimited everything + cloud hosting
+                </div>
+              </motion.div>
             </div>
           </motion.div>
 

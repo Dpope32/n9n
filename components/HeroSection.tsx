@@ -12,7 +12,10 @@ import { useRouter } from 'next/navigation';
 const aiExamples = [
   "I'll help you build a workflow that processes customer emails, extracts sentiment, and automatically routes them to the right team member based on urgency and topic.",
   "I understand you're having an issue with your headers in the Get HTTP Node. Let me fix that authentication configuration and add proper error handling for you.",
-  "Sounds great, I will build you an automated workflow to run on Sunday nights to backup to S3 and send you an email with the results."
+  "Sounds great, I will build you an automated workflow to run on Sunday nights to backup to S3 and send you an email with the results.",
+  "Perfect! I'll create a real estate workflow that monitors new MLS listings, filters by your criteria, sends property details to your CRM, and automatically schedules viewing appointments with potential clients.",
+  "I see the issue - your JSON parsing is failing because the webhook data structure changed. Let me update the Set node to handle the nested objects properly and add data validation to prevent future breaks.",
+  "I'll build you an e-commerce workflow that monitors inventory levels, automatically reorders stock when quantities drop below threshold, updates your accounting system, and sends Slack notifications to your team."
 ];
 
 export function HeroSection() {
@@ -21,20 +24,22 @@ export function HeroSection() {
 
   return (
     <>
-      <div id="overview" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#1a1a1a]">
-        {/* Background Image - FIXED: Made more visible again */}
-        <div className="absolute inset-0">
-          <Image
-            src="/interesting.png"
-            alt="Background"
-            fill
-            className="object-cover opacity-20"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a]/90 via-[#1a1a1a]/80 to-[#1a1a1a]/90" />
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div id="overview" className="relative min-h-screen flex items-center justify-center bg-[#0a0a0a] px-2 sm:px-3 lg:px-4 pt-20 pb-20">
+        <div className="relative max-w-7xl mx-auto w-full">
+          {/* Background Container with Image */}
+          <div className="relative rounded-3xl overflow-hidden">
+            <div className="absolute inset-0">
+              <Image
+                src="/interesting.png"
+                alt="Background"
+                fill
+                className="object-cover opacity-40"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a]/60 via-[#1a1a1a]/50 to-[#1a1a1a]/70" />
+            </div>
+            
+            <div className="relative px-8 py-16 sm:px-16 sm:py-24 lg:px-20 lg:py-32 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -148,7 +153,7 @@ export function HeroSection() {
             className="mt-20"
           >
             <div className="relative max-w-7xl mx-auto">
-              <div className="bg-[#0f0f0f] rounded-2xl p-8 shadow-2xl border border-gray-800">
+              <div className="bg-[#0f0f0f] rounded-2xl p-8 shadow-2xl border border-gray-800 min-w-[800px] w-full max-w-[1000px] mx-auto">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex space-x-2">
                     <div className="w-3 h-3 bg-red-500 rounded-full"></div>
@@ -166,16 +171,20 @@ export function HeroSection() {
                     <div className="w-2 h-2 bg-[#5b64a2] rounded-full animate-pulse"></div>
                     <span className="text-[#5b64a2] font-mono">AI Assistant:</span>
                   </div>
-                  <CyclingTypewriter 
-                    examples={aiExamples}
-                    typingSpeed={30}
-                    readingTime={7500}
-                    className="text-green-400 font-mono text-lg leading-relaxed"
-                  />
+                  <div className="min-h-[120px] flex items-start">
+                    <CyclingTypewriter 
+                      examples={aiExamples}
+                      typingSpeed={30}
+                      readingTime={7500}
+                      className="text-green-400 font-mono text-lg leading-relaxed"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </motion.div>
+            </div>
+          </div>
         </div>
       </div>
 

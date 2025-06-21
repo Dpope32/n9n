@@ -15,11 +15,9 @@ export default function LandingPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-[#1a1a1a] relative">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-[#0a0a0a] relative w-full overflow-x-hidden">
       <HeroSection />
 
-      {/* Features Section */}
       <motion.section
         id="features"
         className="py-20 bg-[#161616]"
@@ -29,7 +27,7 @@ export default function LandingPage() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">
+            <h2 className="text-4xl font-bold text-white mb-4">
               Revolutionary Features
             </h2>
             <p className="text-lg text-gray-400">
@@ -145,7 +143,6 @@ export default function LandingPage() {
                 description: "Zapier, Make, and many other automation tools are focused on the developer. n8n is focused on the user. Seeing the visual green line is a great feeling."
               },
               
-              
             ].map((advantage, index) => (
               <motion.div
                 key={advantage.title}
@@ -173,7 +170,6 @@ export default function LandingPage() {
         </div>
       </motion.section>
 
-      {/* Pricing Section */}
       <motion.section
         id="pricing"
         className="py-20 bg-[#161616]"
@@ -186,7 +182,6 @@ export default function LandingPage() {
         </div>
       </motion.section>
 
-      {/* CTA Section */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -196,7 +191,7 @@ export default function LandingPage() {
           <div className="relative bg-gradient-to-r from-[#5b64a2]/10 to-[#8b95d3]/10 rounded-2xl p-12 border border-[#5b64a2]/20 backdrop-blur-sm">
             <div className="text-center">
               <h2 className="text-3xl font-bold text-white mb-4">
-                Ready to Revolutionize Your Automation?
+                Ready to 10x Your Automation?
               </h2>
               <p className="text-lg text-gray-300 mb-8">
                 Install N9N today and become the AI layer on top of n8n

@@ -19,25 +19,28 @@ export function HeroSection() {
 
   return (
     <>
-      <div id="overview" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image - FIXED: Made more visible */}
-        <div className="absolute inset-0">
-          <Image
-            src="/interesting.png"
-            alt="Background"
-            fill
-            className="object-cover opacity-40"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a]/70 via-[#1a1a1a]/50 to-[#1a1a1a]/80" />
-        </div>
+      <div id="overview" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#1a1a1a]">
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Background Image - FIXED: Now positioned behind content area like Cursor */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="relative w-full h-full">
+              <Image
+                src="/interesting.png"
+                alt="Background"
+                fill
+                className="object-cover opacity-30"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a]/60 via-transparent to-[#1a1a1a]/80" />
+            </div>
+          </div>
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="space-y-8 relative z-10"
           >
             {/* Badge */}
             <div className="inline-flex items-center px-4 py-2 bg-[#5b64a2]/20 border border-[#5b64a2]/30 rounded-full text-[#5b64a2] font-medium backdrop-blur-sm">
@@ -102,7 +105,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-20"
+            className="mt-20 relative z-10"
           >
             <div className="relative max-w-5xl mx-auto">
               <div className="bg-[#0f0f0f] rounded-2xl p-8 shadow-2xl border border-gray-800">

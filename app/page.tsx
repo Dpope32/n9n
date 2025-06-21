@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { Zap, Code, Workflow, Users, Cloud, Star, FileText } from 'lucide-react';
+import { Zap, Workflow, Users, Cloud, Star, FileText } from 'lucide-react';
 import { FaChrome } from 'react-icons/fa6';
 import { PricingSection } from '@/components/PricingSection';
 import { HeroSection } from '@/components/HeroSection';
@@ -111,7 +111,7 @@ export default function LandingPage() {
               {
                 icon: <Users className="w-6 h-6" />,
                 title: "Open Source & Extensible",
-                description: "Built on the world's most popular workflow automation platform with unlimited customization."
+                description: "Built on the world&apos;s most popular workflow automation platform with unlimited customization."
               },
               {
                 icon: <Cloud className="w-6 h-6" />,

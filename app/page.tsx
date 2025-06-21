@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { Zap, Code, Workflow, Users, Cloud, Star } from 'lucide-react';
+import { Zap, Code, Workflow, Users, Cloud, Star, FileText } from 'lucide-react';
 import { FaChrome } from 'react-icons/fa6';
 import { PricingSection } from '@/components/PricingSection';
 import { HeroSection } from '@/components/HeroSection';
@@ -39,9 +39,9 @@ export default function LandingPage() {
                 description: "Highlight any workflow section and describe what you want. AI generates the perfect nodes instantly."
               },
               {
-                icon: <Code className="w-8 h-8 text-[#5b64a2]" />,
-                title: "Smart Code Completion",
-                description: "Intelligent suggestions for node configurations, expressions, and data transformations."
+                icon: <FileText className="w-8 h-8 text-[#5b64a2]" />,
+                title: "One-Click Workflow Summarizer",
+                description: "Get instant, AI-generated summaries of your workflows. Understand complex automations at a glance."
               },
               {
                 icon: <Workflow className="w-8 h-8 text-[#5b64a2]" />,

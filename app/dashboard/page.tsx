@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 
 const AUTH_TIMEOUT = 10000; // 10 seconds
+const IS_DEV = process.env.NODE_ENV === 'development';
 
 // Dashboard metrics data
 const dashboardMetrics = [
@@ -87,7 +88,7 @@ export default function Dashboard() {
   const [authTimeout, setAuthTimeout] = useState(false);
   const [hasCheckedAccess, setHasCheckedAccess] = useState(false);
 
-  // Simplified access control - no infinite loops
+  // More permissive access control for development
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
 
@@ -107,11 +108,17 @@ export default function Dashboard() {
         hasSubscription: !!subscription,
         status: subscription?.status,
         isInTrial: isInTrial,
-        hasAccess: !!user && (hasValidSubscription || isInTrial)
+        isDev: IS_DEV,
+        hasAccess: !!user && (hasValidSubscription || isInTrial || IS_DEV)
       });
 
-      // Check access
-      if (!user || (!hasValidSubscription && !isInTrial)) {
+      // In development, only require authentication
+      // In production, require subscription or trial
+      const hasAccess = IS_DEV ? 
+        !!user : // Dev: just need to be logged in
+        !!user && (hasValidSubscription || isInTrial); // Prod: need subscription/trial
+
+      if (!hasAccess) {
         console.log('No valid access, redirecting to profile');
         router.replace('/profile');
         return;
@@ -146,6 +153,13 @@ export default function Dashboard() {
   // Show dashboard content
   return (
     <div className="min-h-screen bg-[#1a1a1a]">
+      {/* Dev Mode Banner */}
+      {IS_DEV && (
+        <div className="bg-yellow-600 text-black px-4 py-2 text-center text-sm font-medium">
+          🚧 Development Mode - Dashboard accessible with just authentication
+        </div>
+      )}
+
       {/* Dashboard Header */}
       <div className="bg-[#161616] border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -155,7 +169,7 @@ export default function Dashboard() {
             </h1>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-400">
-                {isInTrial ? "Trial Period" : "Premium Plan"}
+                {isInTrial ? "Trial Period" : IS_DEV ? "Development Mode" : "Premium Plan"}
               </span>
             </div>
           </div>
@@ -172,7 +186,7 @@ export default function Dashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-[#161616] rounded-xl p-6 shadow-sm border border-gray-800"
+              className="bg-[#161616] rounded-xl p-6 shadow-sm border border-gray-800 hover:border-[#5b64a2]/30 transition-all"
             >
               <div className="flex items-center justify-between">
                 <div className="p-2 bg-[#5b64a2]/20 rounded-lg">
@@ -205,9 +219,12 @@ export default function Dashboard() {
               <BarChart3 className="h-5 w-5 text-gray-400" />
             </div>
             <div className="h-64 flex items-center justify-center border-2 border-dashed border-gray-700 rounded-lg">
-              <p className="text-gray-500">
-                Analytics Coming Soon
-              </p>
+              <div className="text-center">
+                <p className="text-gray-500 mb-2">📊 Analytics Coming Soon</p>
+                <p className="text-xs text-gray-600">
+                  Real workflow execution data will appear here
+                </p>
+              </div>
             </div>
           </div>
 
@@ -217,14 +234,15 @@ export default function Dashboard() {
               Recent Activity
             </h3>
             <div className="space-y-4">
-              {recentActivity.map((activity) => (
+              {recentActivity.map((activity, index) => (
                 <motion.div
                   key={activity.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className="flex items-center space-x-3 text-sm"
+                  transition={{ delay: index * 0.1 }}
+                  className="flex items-center space-x-3 text-sm p-3 rounded-lg bg-[#1a1a1a] hover:bg-[#1f1f1f] transition-colors"
                 >
-                  <div className="p-2 bg-[#5b64a2]/20 rounded-lg">
+                  <div className="p-2 bg-[#5b64a2]/20 rounded-lg text-[#5b64a2]">
                     {activity.icon}
                   </div>
                   <div>

@@ -1,4 +1,4 @@
-# N9N: "The Cursor for Automation"
+# N9N: 
 ![image](https://github.com/user-attachments/assets/d5932263-3af7-4d25-8e12-dc643cd6f133)
 
 AI-powered automation builder that brings natural language workflow creation directly to n8n.

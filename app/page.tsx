@@ -3,406 +3,322 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { PricingSection } from '@/components/PricingSection';
 import { useTrialStatus } from '@/hooks/useTrialStatus';
-// import { DemoWidget } from '@/components/DemoWidget';
-// import { MetricCard } from '@/components/MetricCard';
 import { TypewriterEffect } from '@/components/TypewriterEffect';
-import { FaReddit } from 'react-icons/fa';
 import { 
-  FaGithub, 
-  FaDiscord, 
-  FaProductHunt,
-  FaXTwitter,
-  FaHackerNews,
-  FaInstagram,
-  FaTiktok,
-  FaYoutube
+  FaChrome, 
+  FaFirefox,
+  FaGithub,
+  FaDiscord
 } from 'react-icons/fa6';
-import { 
- Lock, CreditCard, Moon
-} from 'lucide-react';
+import { Sparkles, Zap, Code, Workflow, Users, Cloud, ArrowRight, Star } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Link as ScrollLink } from 'react-scroll';
 import { VideoModal } from '@/components/VideoModal';
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-// Update workflowSteps to be more generic
-const workflowSteps = [
-  {
-    title: "Step One",
-    description: "First step of your workflow",
-    preview: <TypewriterEffect text="Processing step one..." />
-  },
-  {
-    title: "Step Two",
-    description: "Second step of your workflow",
-    preview: <TypewriterEffect text="Executing step two..." />
-  },
-  {
-    title: "Step Three",
-    description: "Third step of your workflow",
-    preview: <TypewriterEffect text="Running step three..." />
-  },
-  {
-    title: "Step Four",
-    description: "Fourth step of your workflow",
-    preview: <TypewriterEffect text="Completing step four..." />
-  }
-];
-
-// Update platforms to be generic
-const platforms = [
-  { name: 'Platform 1', icon: FaGithub },
-  { name: 'Platform 2', icon: FaDiscord },
-  { name: 'Platform 3', icon: FaReddit },
-  { name: 'Platform 4', icon: FaProductHunt },
-  { name: 'Platform 5', icon: FaXTwitter },
-  { name: 'Platform 6', icon: FaHackerNews },
-  { name: 'Platform 7', icon: FaInstagram },
-  { name: 'Platform 8', icon: FaTiktok },
-  { name: 'Platform 9', icon: FaYoutube }
-];
-
-// Update workflowSections to be generic
-const workflowSections = [
-  {
-    id: "overview",
-    title: "Overview",
-    description: "Everything you need to build modern SaaS applications",
-    bgColor: "bg-white dark:bg-[#0B1120]"
-  },
-  {
-    id: "authentication",
-    title: "Authentication",
-    description: "Secure user authentication with multiple providers",
-    bgColor: "bg-slate-50 dark:bg-[#0B1120]",
-    metrics: [
-      { label: "Auth Providers", value: "5+" },
-      { label: "Setup Time", value: "2min" },
-      { label: "Security", value: "A+" }
-    ]
-  },
-  {
-    id: "payments",
-    title: "Payments",
-    description: "Seamless payment integration with Stripe",
-    bgColor: "bg-white dark:bg-[#0B1120]",
-    metrics: [
-      { label: "Integration", value: "1-Click" },
-      { label: "Providers", value: "Stripe" },
-      { label: "Setup Time", value: "5min" }
-    ]
-  },
-  {
-    id: "database",
-    title: "Database",
-    description: "Powerful database with Supabase integration",
-    bgColor: "bg-slate-50 dark:bg-[#0B1120]",
-    metrics: [
-      { label: "Database", value: "PostgreSQL" },
-      { label: "Real-time", value: "Yes" },
-      { label: "Security", value: "RLS" }
-    ]
-  },
-  {
-    id: "features",
-    title: "Features",
-    description: "Additional features to enhance your application",
-    bgColor: "bg-white dark:bg-[#0B1120]",
-    metrics: [
-      { label: "Dark Mode", value: "Built-in" },
-      { label: "Components", value: "50+" },
-      { label: "TypeScript", value: "100%" }
-    ]
-  },
-  {
-    id: "pricing",
-    title: "Pricing",
-    description: "Simple, transparent pricing for your needs",
-    bgColor: "bg-slate-50 dark:bg-[#0B1120]"
-  }
-];
-
-// Custom Hook to create section progress values
-function useSectionProgressValues(numSections: number) {
-  const { scrollYProgress } = useScroll();
-  
-  // Create all transforms at once, at the top level
-  const section1Progress = useTransform(
-    scrollYProgress,
-    [0 / numSections, 1 / numSections],
-    [0, 1]
-  );
-  const section2Progress = useTransform(
-    scrollYProgress,
-    [1 / numSections, 2 / numSections],
-    [0, 1]
-  );
-  const section3Progress = useTransform(
-    scrollYProgress,
-    [2 / numSections, 3 / numSections],
-    [0, 1]
-  );
-  const section4Progress = useTransform(
-    scrollYProgress,
-    [3 / numSections, 4 / numSections],
-    [0, 1]
-  );
-
-  return [section1Progress, section2Progress, section3Progress, section4Progress];
-}
-
-// Feature cards data
-const featureCards = [
-  {
-    title: "Authentication",
-    description: "Supabase auth with social providers",
-    icon: <Lock className="h-6 w-6 text-primary" />,
-    bgGradient: "from-blue-500/10 to-purple-500/10"
-  },
-  {
-    title: "Payments",
-    description: "Stripe subscription management",
-    icon: <CreditCard className="h-6 w-6 text-primary" />,
-    bgGradient: "from-green-500/10 to-emerald-500/10"
-  },
-  {
-    title: "Dark Mode",
-    description: "Built-in theme management",
-    icon: <Moon className="h-6 w-6 text-primary" />,
-    bgGradient: "from-orange-500/10 to-red-500/10"
-  }
-];
+import { sections, automationSteps, coreFeatures, n8nAdvantages } from '@/app/constants/hero';
+import Image from 'next/image';
 
 export default function LandingPage() {
   const { user } = useAuth();
-  const { isInTrial } = useTrialStatus();
+  const { isInTrial, trialEndTime } = useTrialStatus();
   const [activeSection, setActiveSection] = useState("overview");
-  const sectionProgressValues = useSectionProgressValues(workflowSections.length);
-  
   const router = useRouter();
-
-  const [dashboardRef, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1
-  });
-
-  const { scrollYProgress } = useScroll();
-
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 300], [0, -50]);
+  const [heroRef, heroInView] = useInView({ threshold: 0.1 });
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0B1120] relative">
-      {/* Enhanced Sticky Navigation */}
-      <nav className="sticky top-0 z-50 bg-white/80 dark:bg-neutral-darker/80 backdrop-blur-sm border-b border-slate-200 dark:border-slate-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4 overflow-x-auto hide-scrollbar">
-            {workflowSections.map((section, index) => (
-              <ScrollLink
-                key={section.id}
-                to={section.id}
-                spy={true}
-                smooth={true}
-                offset={-100}
-                duration={500}
-                onSetActive={() => setActiveSection(section.id)}
-                className={`flex items-center cursor-pointer group min-w-fit mx-4 first:ml-0 last:mr-0`}
-              >
-                <div className="relative">
-                  <span 
-                    className={`w-8 h-8 rounded-full flex items-center justify-center mr-2 transition-all duration-300
-                      ${activeSection === section.id 
-                      ? 'bg-primary dark:bg-primary-light text-white' 
-                      : 'bg-primary/10 dark:bg-primary-light/10 text-primary dark:text-primary-light group-hover:bg-primary/20 dark:group-hover:bg-primary-light/20'}`}
-                  >
-                    {index + 1}
-                  </span>
-                </div>
-                <span 
-                  className={`text-sm font-medium transition-colors duration-300 hidden md:block whitespace-nowrap
-                    ${activeSection === section.id 
-                    ? 'text-primary dark:text-primary-light' 
-                    : 'text-slate-600 dark:text-slate-300 group-hover:text-primary dark:group-hover:text-primary-light'}`}
-                >
-                  {section.title}
-                </span>
-              </ScrollLink>
-            ))}
-          </div>
+    <div className="min-h-screen bg-[#1a1a1a] relative">
+      {/* Hero Section - Cursor.com inspired */}
+      <div id="overview" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/interesting.png"
+            alt="Background"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a]/80 via-[#1a1a1a]/60 to-[#1a1a1a]/90" />
         </div>
-      </nav>
-
-      {/* Hero Section - Now acts as Overview */}
-      <div id="overview" className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-light/10 to-accent-light/10" />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative pt-20 pb-16 sm:pb-24">
-            {/* Header Content */}
-            <div className="text-center">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white">
-                <span className="block">Next.js + Stripe + Supabase</span>
-                <span className="block text-primary dark:text-primary-light">Production-Ready Template</span>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            {/* Badge */}
+            <div className="inline-flex items-center px-4 py-2 bg-[#5b64a2]/20 border border-[#5b64a2]/30 rounded-full text-[#5b64a2] font-medium backdrop-blur-sm">
+              <Sparkles className="w-4 h-4 mr-2" />
+              The AI Code Editor for n8n
+            </div>
+
+            {/* Main Heading */}
+            <div className="space-y-4">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                The AI Code Editor
               </h1>
-              <p className="mt-6 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-300">
-                Start building with authentication and payments in minutes.
-              </p>
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-[#5b64a2] to-[#8b95d3] bg-clip-text text-transparent">
+                for n8n Workflows
+              </h2>
+            </div>
+
+            {/* Subtitle */}
+            <p className="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+              Built to make you extraordinarily productive. N9N is the best way to build workflows with AI.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex items-center px-8 py-4 bg-[#5b64a2] hover:bg-[#4a5491] text-white rounded-lg font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+              >
+                <FaChrome className="mr-3 text-xl" />
+                Download for Chrome
+              </motion.button>
               
-              {/* CTA Buttons */}
-              <div className="mt-10 flex gap-4 justify-center">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => setIsVideoModalOpen(true)}
-                  className="px-8 py-3 bg-primary hover:bg-primary-dark text-white rounded-lg shadow-lg hover:shadow-xl transition-all"
-                >
-                  Watch Demo
-                </motion.button>
-                <button 
-                  onClick={() => router.push('/dashboard')} 
-                  className="px-8 py-3 bg-white dark:bg-neutral-dark hover:bg-slate-50 dark:hover:bg-neutral-darker text-primary dark:text-primary-light border-2 border-primary dark:border-primary-light rounded-lg shadow-lg hover:shadow-xl transition-all"
-                >
-                  Start Free Trial
-                </button>
-              </div>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setIsVideoModalOpen(true)}
+                className="flex items-center px-8 py-4 bg-transparent border-2 border-gray-600 hover:border-[#5b64a2] text-white rounded-lg font-semibold text-lg transition-all duration-300"
+              >
+                Watch Demo
+                <ArrowRight className="ml-3 text-xl" />
+              </motion.button>
             </div>
 
-            {/* Combined Preview: Code + Workflow Steps */}
-            <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Code Preview */}
-              <div className="relative">
-                <pre className="relative rounded-xl bg-slate-900 p-8 shadow-2xl">
-                  <code className="text-sm sm:text-base text-slate-100">
-                    <TypewriterEffect text={`// 🚀 The Ultimate Dev Setup
-import { useCoffee, useCode } from '@/hooks/dev';
-
-export const DevLife = () => {
-  const { coffee } = useCoffee();
-  const { bugs } = useCode();
-  
-  return (
-    <div className="dev-life">
-      <Status>
-        {coffee ? '⚡️ Coding Mode' : '😴 Need Coffee'}
-        {bugs === 0 ? '🎉 No Bugs!' : '🐛 Debug Time'}
-      </Status>
-    </div>
-  );`} />
-                  </code>
-                </pre>
+            {/* Stats/Features */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-16 max-w-3xl mx-auto">
+              <div className="text-center space-y-2">
+                <div className="text-3xl font-bold text-[#5b64a2]">10x</div>
+                <div className="text-gray-400">Faster Workflow Building</div>
               </div>
-
-              {/* Workflow Steps */}
-              <div className="grid grid-cols-1 gap-4">
-                {workflowSteps.map((step, index) => (
-                  <motion.div
-                    key={step.title}
-                    initial={{ opacity: 1, y: 0 }}
-                    className="relative p-4 bg-white/5 dark:bg-neutral-dark border border-slate-200 dark:border-slate-700/50 backdrop-blur-sm rounded-xl shadow-lg hover:border-primary/50 dark:hover:border-primary/50 transition-colors"
-                  >
-                    <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-primary dark:bg-primary-light text-white rounded-full flex items-center justify-center font-semibold">
-                      {index + 1}
-                    </div>
-                    <div className="ml-8">
-                      <h3 className="font-semibold text-slate-900 dark:text-white">{step.title}</h3>
-                      <p className="text-sm text-slate-600 dark:text-slate-300">{step.description}</p>
-                    </div>
-                  </motion.div>
-                ))}
+              <div className="text-center space-y-2">
+                <div className="text-3xl font-bold text-[#5b64a2]">500+</div>
+                <div className="text-gray-400">Supported Nodes</div>
+              </div>
+              <div className="text-center space-y-2">
+                <div className="text-3xl font-bold text-[#5b64a2]">AI</div>
+                <div className="text-gray-400">Powered Assistant</div>
               </div>
             </div>
-          </div>
+          </motion.div>
+
+          {/* Code Demo Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mt-20"
+          >
+            <div className="relative max-w-5xl mx-auto">
+              <div className="bg-[#0f0f0f] rounded-2xl p-8 shadow-2xl border border-gray-800">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex space-x-2">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  </div>
+                  <div className="flex items-center space-x-2 text-gray-400 text-sm">
+                    <Workflow className="w-4 h-4" />
+                    <span>n8n workflow editor</span>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-[#5b64a2] rounded-full animate-pulse"></div>
+                    <span className="text-[#5b64a2] font-mono">AI Assistant:</span>
+                  </div>
+                  <div className="text-green-400 font-mono text-lg leading-relaxed">
+                    <TypewriterEffect 
+                      text="I'll help you build a workflow that processes customer emails, extracts sentiment, and automatically routes them to the right team member based on urgency and topic."
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Other sections */}
-      {workflowSections.slice(1).map((section, index) => (
-        <motion.section
-          key={section.id}
-          id={section.id}
-          className={`py-20 ${section.bgColor}`}
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-20%" }}
-          onViewportEnter={() => setActiveSection(section.id)}
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Section header */}
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-                {section.title}
-              </h2>
-              <p className="mt-4 text-lg text-slate-600 dark:text-slate-300">
-                {section.description}
-              </p>
-            </div>
-
-            {/* Clean Metrics Display */}
-            {section.metrics && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                {section.metrics.map((metric, i) => (
-                  <motion.div
-                    key={metric.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                    className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10"
-                  >
-                    <div className="text-3xl font-bold text-primary mb-2">
-                      {metric.value}
-                    </div>
-                    <div className="text-sm text-slate-500 dark:text-slate-400">
-                      {metric.label}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            )}
-
-            {/* Pricing Section */}
-            {section.id === "pricing" && <PricingSection />}
+      {/* Features Section */}
+      <motion.section
+        id="features"
+        className="py-20 bg-[#161616]"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Revolutionary Features
+            </h2>
+            <p className="text-lg text-gray-400">
+              The AI layer that makes n8n 10x better
+            </p>
           </div>
-        </motion.section>
-      ))}
 
-      {/* Enhanced CTA Section */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <Zap className="w-8 h-8 text-[#5b64a2]" />,
+                title: "Instant AI Generation",
+                description: "Highlight any workflow section and describe what you want. AI generates the perfect nodes instantly."
+              },
+              {
+                icon: <Code className="w-8 h-8 text-[#5b64a2]" />,
+                title: "Smart Code Completion",
+                description: "Intelligent suggestions for node configurations, expressions, and data transformations."
+              },
+              {
+                icon: <Workflow className="w-8 h-8 text-[#5b64a2]" />,
+                title: "Workflow Optimization",
+                description: "AI analyzes your workflows and suggests performance improvements and best practices."
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="relative p-8 bg-[#1f1f1f] hover:bg-[#252525] rounded-xl border border-gray-800 hover:border-[#5b64a2]/30 transition-all group"
+              >
+                <div className="mb-4">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-400">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Why n8n Section */}
+      <motion.section
+        id="why-n8n"
+        className="py-20 bg-[#1a1a1a]"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Why n8n IS the Future
+            </h2>
+            <p className="text-lg text-gray-400">
+              The perfect foundation for AI-powered automation
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                icon: <Users className="w-6 h-6" />,
+                title: "Open Source & Extensible",
+                description: "Built on the world's most popular workflow automation platform with unlimited customization."
+              },
+              {
+                icon: <Cloud className="w-6 h-6" />,
+                title: "Self-Hosted or Cloud",
+                description: "Works with any n8n instance - your self-hosted setup or n8n Cloud."
+              },
+              {
+                icon: <Workflow className="w-6 h-6" />,
+                title: "500+ Integrations",
+                description: "Connect to every service you use with battle-tested, community-driven nodes."
+              },
+              {
+                icon: <Star className="w-6 h-6" />,
+                title: "Enterprise Ready",
+                description: "Scale from personal automation to enterprise-grade workflows with confidence."
+              }
+            ].map((advantage, index) => (
+              <motion.div
+                key={advantage.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="p-6 bg-[#161616] rounded-xl border border-gray-800"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="p-3 bg-[#5b64a2]/20 text-[#5b64a2] rounded-lg">
+                    {advantage.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-white mb-2">
+                      {advantage.title}
+                    </h3>
+                    <p className="text-gray-400">
+                      {advantage.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Pricing Section */}
+      <motion.section
+        id="pricing"
+        className="py-20 bg-[#161616]"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <PricingSection />
+        </div>
+      </motion.section>
+
+      {/* CTA Section */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        className="relative py-20"
+        className="relative py-20 bg-[#1a1a1a]"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-light/10 to-accent-light/10" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative bg-white dark:bg-neutral-dark rounded-xl shadow-xl p-12 border border-slate-200 dark:border-slate-700">
+          <div className="relative bg-gradient-to-r from-[#5b64a2]/10 to-[#8b95d3]/10 rounded-2xl p-12 border border-[#5b64a2]/20 backdrop-blur-sm">
             <div className="text-center">
-              <motion.h2 
-                initial={{ y: 20 }}
-                whileInView={{ y: 0 }}
-                className="text-3xl font-bold text-slate-900 dark:text-white"
-              >
-                Ready to Get Started?
-              </motion.h2>
-              <p className="mt-4 text-lg text-slate-600 dark:text-slate-300">
-                Start using our product today
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Ready to Revolutionize Your Automation?
+              </h2>
+              <p className="text-lg text-gray-300 mb-8">
+                Install N9N today and become the AI layer on top of n8n
               </p>
               
-              <div className="mt-10 flex gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => setIsVideoModalOpen(true)}
-                  className="px-8 py-3 bg-primary hover:bg-primary-dark text-white rounded-lg shadow-lg hover:shadow-xl transition-all"
+                  className="flex items-center px-8 py-3 bg-[#5b64a2] hover:bg-[#4a5491] text-white rounded-lg shadow-lg hover:shadow-xl transition-all font-semibold"
                 >
-                  Watch Demo
+                  <FaChrome className="mr-2" />
+                  Install Extension
                 </motion.button>
-                <motion.button 
+                <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => router.push('/dashboard')}
-                  className="px-8 py-3 bg-white dark:bg-neutral-dark hover:bg-slate-50 dark:hover:bg-neutral-darker text-primary dark:text-primary-light border-2 border-primary dark:border-primary-light rounded-lg shadow-lg hover:shadow-xl transition-all"
+                  className="px-8 py-3 bg-transparent border-2 border-gray-600 hover:border-[#5b64a2] text-white rounded-lg transition-all font-semibold"
                 >
                   Start Free Trial
                 </motion.button>
@@ -420,4 +336,3 @@ export const DevLife = () => {
     </div>
   );
 }
-

@@ -124,10 +124,10 @@ export function useSubscription() {
   }, [debouncedSyncWithStripe]);
 
   useEffect(() => {
-    if (!user) return;
+    if (!user?.id) return;
 
     const channel = supabase
-      .channel('subscription_updates')
+      .channel(`subscription_updates_${user.id}`)
       .on(
         'postgres_changes',
         {
@@ -147,9 +147,9 @@ export function useSubscription() {
       .subscribe();
 
     return () => {
-      supabase.removeChannel(channel);
+      channel.unsubscribe();
     };
-  }, [user, supabase, checkValidSubscription]);
+  }, [user?.id, checkValidSubscription]);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -175,4 +175,4 @@ export function useSubscription() {
     }, [debouncedSyncWithStripe]),
     fetchSubscription // Expose fetch function for manual refresh
   };
-} 
+}

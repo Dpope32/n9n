@@ -69,11 +69,12 @@ export default function PaymentPage() {
       <SubscriptionStatus />
 
       <div className="w-full max-w-md px-4">
-        <StripeBuyButton
+        {/* Temporarily comment out the StripeBuyButton */}
+        {/* <StripeBuyButton
           className="flex justify-center text-neutral"
           buyButtonId={process.env.NEXT_PUBLIC_STRIPE_BUTTON_ID || ''}
           publishableKey={process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ''}
-        />
+        /> */}
       </div>
     </div>
   );

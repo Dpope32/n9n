@@ -240,10 +240,10 @@ function ProfileContent() {
                 <p>Subscribe to unlock the amazing cooking experience.</p>
               )}
               
-              <StripeBuyButton
+              {/* <StripeBuyButton
                 buyButtonId={process.env.NEXT_PUBLIC_STRIPE_BUTTON_ID || ''}
                 publishableKey={process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ''}
-              />
+              /> */}
             </div>
           )}
         </div>

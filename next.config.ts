@@ -28,7 +28,14 @@ const nextConfig: NextConfig = {
       ],
     },
   ],
-  /* config options here */
+  
+  // Webpack configuration (fallback for production builds)
+  webpack: (config, { isServer }) => {
+    config.ignoreWarnings = [
+      { module: /node_modules\/punycode/ }
+    ];
+    return config;
+  },
 };
 
 export default nextConfig;

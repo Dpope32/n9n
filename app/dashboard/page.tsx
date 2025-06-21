@@ -103,59 +103,29 @@ export default function Dashboard() {
   // const [recentFeedback, setRecentFeedback] = useState([]);
   // const [pendingPRs, setPendingPRs] = useState([]);
 
-  // First check - Subscription and trial check
+  // Combined access check
   useEffect(() => {
-    if (isSubLoading || isTrialLoading) return;
+    if (isAuthLoading || isSubLoading || isTrialLoading) return;
     
     const hasValidSubscription = ['active', 'trialing'].includes(subscription?.status || '');
     
-    console.log('Access check isInTrial:', {
+    console.log('Access check:', {
+      user: !!user,
       hasSubscription: !!subscription,
       status: subscription?.status,
       isInTrial: isInTrial,
       validUntil: subscription?.current_period_end
     });
 
-    // Only redirect if there's no valid subscription AND no valid trial
-    if (!hasValidSubscription && !isInTrial) {
-      console.log('No valid subscription or trial, redirecting');
+    // Only redirect if there's no user OR (no valid subscription AND no valid trial)
+    if (!user || (!hasValidSubscription && !isInTrial)) {
+      console.log('No valid access, redirecting to profile');
       router.replace('/profile');
+      return;
     }
-  }, [subscription, isSubLoading, isTrialLoading, router, isInTrial]);
 
-  // Second check - Auth check
-  useEffect(() => {
-    if (isAuthLoading || isTrialLoading) return;
-
-    console.log('Access check:', {
-      isSubscriber,
-      hasCheckedSubscription,
-      isInTrial: isInTrial,
-      authLoading: isAuthLoading,
-    });
-
-    if (!hasCheckedSubscription) {
-      setHasCheckedSubscription(true);
-      
-      // Allow access for both subscribers and trial users
-      if (!user || (!isSubscriber && !isInTrial && !isAuthLoading)) {
-        console.log('No valid subscription or trial, redirecting');
-        router.replace('/profile');
-      }
-    }
-  }, [isSubscriber, isAuthLoading, hasCheckedSubscription, router, user, subscription, isTrialLoading, isInTrial]);
-
-  // Add refresh effect
-  useEffect(() => {
-    const refreshSubscription = async () => {
-      await fetchSubscription();
-      setHasCheckedSubscription(true);
-    };
-    
-    if (user?.id) {
-      refreshSubscription();
-    }
-  }, [user?.id, fetchSubscription]);
+    setHasCheckedSubscription(true);
+  }, [user, subscription, isInTrial, isAuthLoading, isSubLoading, isTrialLoading, router]);
 
   useEffect(() => {
     if (user?.id) {

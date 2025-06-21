@@ -10,12 +10,12 @@ import { VideoModal } from '@/components/VideoModal';
 import { useRouter } from 'next/navigation';
 
 const aiExamples = [
-  "I'll help you build a workflow that processes customer emails, extracts sentiment, and automatically routes them to the right team member based on urgency and topic.",
-  "I understand you&apos;re having an issue with your headers in the Get HTTP Node. Let me fix that authentication configuration and add proper error handling for you.",
+  "I will help you build a workflow that processes customer emails, extracts sentiment, and automatically routes them to the right team member based on urgency and topic.",
+  "I understand you are having an issue with your headers in the Get HTTP Node. Let me fix that authentication configuration and add proper error handling for you.",
   "Sounds great, I will build you an automated workflow to run on Sunday nights to backup to S3 and send you an email with the results.",
-  "Perfect! I&apos;ll create a real estate workflow that monitors new MLS listings, filters by your criteria, sends property details to your CRM, and automatically schedules viewing appointments with potential clients.",
+  "Perfect! I will create a real estate workflow that monitors new MLS listings, filters by your criteria, sends property details to your CRM, and automatically schedules viewing appointments with potential clients.",
   "I see the issue - your JSON parsing is failing because the webhook data structure changed. Let me update the Set node to handle the nested objects properly and add data validation to prevent future breaks.",
-  "I&apos;ll build you an e-commerce workflow that monitors inventory levels, automatically reorders stock when quantities drop below threshold, updates your accounting system, and sends Slack notifications to your team."
+  "I will build you an e-commerce workflow that monitors inventory levels, automatically reorders stock when quantities drop below threshold, updates your accounting system, and sends Slack notifications to your team."
 ];
 
 export function HeroSection() {

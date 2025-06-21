@@ -303,7 +303,7 @@ export default function Dashboard() {
               <div>
                 <h3 className="text-lg font-semibold text-white mb-2">Ready to unlock unlimited workflows?</h3>
                 <p className="text-gray-300">
-                  You're using <span className="text-[#5b64a2] font-medium">7 of 10</span> free workflows and 
+                  You are using <span className="text-[#5b64a2] font-medium">7 of 10</span> free workflows and 
                   <span className="text-[#5b64a2] font-medium"> 23 of 50</span> AI debugging sessions this month.
                 </p>
               </div>

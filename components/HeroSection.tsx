@@ -42,22 +42,16 @@ export function HeroSection() {
             transition={{ duration: 0.8 }}
             className="space-y-8 relative z-10"
           >
-            {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 bg-[#5b64a2]/20 border border-[#5b64a2]/30 rounded-full text-[#5b64a2] font-medium backdrop-blur-sm">
-              <Sparkles className="w-4 h-4 mr-2" />
-              The Cursor for n8n
-            </div>
-
             {/* Main Heading */}
             <div className="space-y-4">
-              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight">
                 <span className="text-white">The <em>much needed</em> AI for </span>
                 <span className="bg-gradient-to-r from-[#5b64a2] to-[#8b95d3] bg-clip-text text-transparent">n8n</span>
               </h1>
             </div>
 
             {/* Subtitle */}
-            <p className="text-2xl sm:text-3xl lg:text-4xl text-gray-300 max-w-5xl mx-auto leading-relaxed mt-6">
+            <p className="text-xl sm:text-2xl lg:text-3xl text-gray-300 max-w-4xl mx-auto leading-relaxed mt-6">
               Integrate AI directly into n8n workflows. Get intelligent assistance to debug, optimize, and create automations beyond your imagination.
             </p>
 
@@ -81,6 +75,14 @@ export function HeroSection() {
                 Watch Demo
                 <ArrowRight className="ml-3 text-xl" />
               </motion.button>
+            </div>
+
+            {/* Badge - moved below buttons */}
+            <div className="flex justify-center pt-6">
+              <div className="inline-flex items-center px-4 py-2 bg-[#5b64a2]/20 border border-[#5b64a2]/30 rounded-full text-[#5b64a2] font-medium backdrop-blur-sm">
+                <Sparkles className="w-4 h-4 mr-2" />
+                The Cursor for n8n
+              </div>
             </div>
 
             {/* Stats */}
@@ -107,7 +109,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="mt-20 relative z-10"
           >
-            <div className="relative max-w-5xl mx-auto">
+            <div className="relative max-w-7xl mx-auto">
               <div className="bg-[#0f0f0f] rounded-2xl p-8 shadow-2xl border border-gray-800">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex space-x-2">

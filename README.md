@@ -1,5 +1,5 @@
 # N9N: 
-![image](https://github.com/user-attachments/assets/d5932263-3af7-4d25-8e12-dc643cd6f133)
+![image](https://github.com/user-attachments/assets/7006dbe5-2477-4623-95ee-dcf7ca4949d1)
 
 AI-powered automation builder that brings natural language workflow creation directly to n8n.
 

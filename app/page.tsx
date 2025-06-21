@@ -41,7 +41,7 @@ export default function LandingPage() {
             {[
               {
                 icon: <Zap className="w-8 h-8 text-[#5b64a2]" />,
-                title: "Instant AI Generation",
+                title: "Instantly Add AI to N8N",
                 description: "Highlight any workflow section and describe what you want. AI generates the perfect nodes instantly."
               },
               {
@@ -53,7 +53,24 @@ export default function LandingPage() {
                 icon: <Workflow className="w-8 h-8 text-[#5b64a2]" />,
                 title: "Workflow Optimization",
                 description: "AI analyzes your workflows and suggests performance improvements and best practices."
-              }
+              },
+              {
+                icon: <Workflow className="w-8 h-8 text-[#5b64a2]" />,
+                title: "AI Powered Debugging",
+                description: "Stuck on a problem? Ask AI to debug your workflow and fix it."
+              },
+              {
+                icon: <Workflow className="w-8 h-8 text-[#5b64a2]" />,
+                title: "10x your productivity",
+                description: "Workflows can take a long time to build. AI can do it in seconds."
+              },
+              {
+                icon: <Workflow className="w-8 h-8 text-[#5b64a2]" />,
+                title: "MCP Integration",
+                description: "Use AI to interact with any service that supports the Model Context Protocol."
+              },
+              
+              
             ].map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -105,7 +122,7 @@ export default function LandingPage() {
               {
                 icon: <Cloud className="w-6 h-6" />,
                 title: "Self-Hosted or Cloud",
-                description: "Works with any n8n instance - your self-hosted setup or n8n Cloud."
+                description: "Works with any n8n instance - your self-hosted setup or n8n Cloud. They don't lock you in, why should we?"
               },
               {
                 icon: <Workflow className="w-6 h-6" />,
@@ -116,7 +133,19 @@ export default function LandingPage() {
                 icon: <Star className="w-6 h-6" />,
                 title: "Enterprise Ready",
                 description: "Scale from personal automation to enterprise-grade workflows with confidence."
-              }
+              },
+              {
+                icon: <Workflow className="w-6 h-6" />,
+                title: "Indie Friendly",
+                description: "Many companies get lost in Enterprise software, n8n keeps the focus on the user by remaining open source and community driven."
+              },
+              {
+                icon: <Workflow className="w-6 h-6" />,
+                title: "UX First",
+                description: "Zapier, Make, and many other automation tools are focused on the developer. n8n is focused on the user. Seeing the visual green line is a great feeling."
+              },
+              
+              
             ].map((advantage, index) => (
               <motion.div
                 key={advantage.title}

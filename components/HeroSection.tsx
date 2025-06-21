@@ -42,22 +42,20 @@ export function HeroSection() {
             {/* Badge */}
             <div className="inline-flex items-center px-4 py-2 bg-[#5b64a2]/20 border border-[#5b64a2]/30 rounded-full text-[#5b64a2] font-medium backdrop-blur-sm">
               <Sparkles className="w-4 h-4 mr-2" />
-              The AI Code Editor for n8n
+              The Cursor for n8n
             </div>
 
             {/* Main Heading */}
             <div className="space-y-4">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">
-                The AI Code Editor
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight">
+                <span className="text-white">The <em>much needed</em> AI for </span>
+                <span className="bg-gradient-to-r from-[#5b64a2] to-[#8b95d3] bg-clip-text text-transparent">n8n</span>
               </h1>
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-[#5b64a2] to-[#8b95d3] bg-clip-text text-transparent">
-                for n8n Workflows
-              </h2>
             </div>
 
             {/* Subtitle */}
             <p className="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              Built to make you extraordinarily productive. N9N is the best way to build workflows with AI.
+              Integrate AI directly into n8n workflows. Get intelligent assistance to debug, optimize, and create automations beyond your imagination.
             </p>
 
             {/* CTA Buttons */}
@@ -128,7 +126,7 @@ export function HeroSection() {
                   <CyclingTypewriter 
                     examples={aiExamples}
                     typingSpeed={30}
-                    readingTime={4000}
+                    readingTime={7500}
                     className="text-green-400 font-mono text-lg leading-relaxed"
                   />
                 </div>

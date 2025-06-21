@@ -109,13 +109,13 @@ export default function Dashboard() {
         status: subscription?.status,
         isInTrial: isInTrial,
         isDev: IS_DEV,
-        hasAccess: !!user && (hasValidSubscription || isInTrial || IS_DEV)
+        hasAccess: IS_DEV || (!!user && (hasValidSubscription || isInTrial))
       });
 
-      // In development, only require authentication
+      // FIXED: In development, allow access without authentication
       // In production, require subscription or trial
       const hasAccess = IS_DEV ? 
-        !!user : // Dev: just need to be logged in
+        true : // Dev: allow access without auth for testing
         !!user && (hasValidSubscription || isInTrial); // Prod: need subscription/trial
 
       if (!hasAccess) {
@@ -156,7 +156,7 @@ export default function Dashboard() {
       {/* Dev Mode Banner */}
       {IS_DEV && (
         <div className="bg-yellow-600 text-black px-4 py-2 text-center text-sm font-medium">
-          🚧 Development Mode - Dashboard accessible with just authentication
+          🚧 Development Mode - Dashboard accessible without authentication
         </div>
       )}
 

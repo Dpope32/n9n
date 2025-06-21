@@ -47,14 +47,14 @@ export function HeroSection() {
 
             {/* Main Heading */}
             <div className="space-y-4">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight">
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight">
                 <span className="text-white">The <em>much needed</em> AI for </span>
                 <span className="bg-gradient-to-r from-[#5b64a2] to-[#8b95d3] bg-clip-text text-transparent">n8n</span>
               </h1>
             </div>
 
             {/* Subtitle */}
-            <p className="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-2xl sm:text-3xl lg:text-4xl text-gray-300 max-w-5xl mx-auto leading-relaxed mt-6">
               Integrate AI directly into n8n workflows. Get intelligent assistance to debug, optimize, and create automations beyond your imagination.
             </p>
 

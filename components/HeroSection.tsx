@@ -20,27 +20,24 @@ export function HeroSection() {
   return (
     <>
       <div id="overview" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#1a1a1a]">
+        {/* Background Image - FIXED: More natural full-screen positioning with subtle visibility */}
+        <div className="absolute inset-0">
+          <Image
+            src="/interesting.png"
+            alt="Background"
+            fill
+            className="object-cover opacity-10"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a]/95 via-[#1a1a1a]/85 to-[#1a1a1a]/95" />
+        </div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {/* Background Image - FIXED: Now positioned behind content area like Cursor */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="relative w-full h-full">
-              <Image
-                src="/interesting.png"
-                alt="Background"
-                fill
-                className="object-cover opacity-30"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a]/60 via-transparent to-[#1a1a1a]/80" />
-            </div>
-          </div>
-
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-8 relative z-10"
+            className="space-y-8"
           >
             {/* Main Heading */}
             <div className="space-y-4">
@@ -51,7 +48,7 @@ export function HeroSection() {
             </div>
 
             {/* Subtitle */}
-            <p className="text-xl sm:text-2xl lg:text-3xl text-gray-300 max-w-4xl mx-auto leading-relaxed mt-6">
+            <p className="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
               Integrate AI directly into n8n workflows. Get intelligent assistance to debug, optimize, and create automations beyond your imagination.
             </p>
 
@@ -107,7 +104,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-20 relative z-10"
+            className="mt-20"
           >
             <div className="relative max-w-7xl mx-auto">
               <div className="bg-[#0f0f0f] rounded-2xl p-8 shadow-2xl border border-gray-800">

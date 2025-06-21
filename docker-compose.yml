@@ -1,0 +1,91 @@
+version: '3.8'
+
+services:
+  n9n-ai:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      # N8N Configuration
+      - N8N_HOST=${N8N_HOST:-http://localhost:5678}
+      - N8N_API_KEY=${N8N_API_KEY:-}
+      
+      # AI Configuration
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      
+      # N9N Configuration
+      - N9N_LICENSE_KEY=${N9N_LICENSE_KEY:-}
+      - N9N_MAX_WORKFLOWS=${N9N_MAX_WORKFLOWS:-3}
+      - N9N_MAX_AI_SESSIONS=${N9N_MAX_AI_SESSIONS:-50}
+      
+      # Database (for usage tracking)
+      - DATABASE_URL=${DATABASE_URL:-sqlite:///app/data/n9n.db}
+      
+      # Security
+      - JWT_SECRET=${JWT_SECRET:-change-this-in-production}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY:-}
+      
+      # Application
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    volumes:
+      - n9n_data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - n9n_network
+
+  # Optional: Include PostgreSQL for production deployments
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=n9n_ai
+      - POSTGRES_USER=n9n
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-change-this-password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - n9n_network
+    profiles:
+      - postgres
+
+  # Optional: Redis for caching and session management
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - n9n_network
+    profiles:
+      - redis
+
+volumes:
+  n9n_data:
+  postgres_data:
+  redis_data:
+
+networks:
+  n9n_network:
+    driver: bridge
+
+# Usage Examples:
+#
+# Basic deployment (SQLite):
+# docker-compose up -d
+#
+# With PostgreSQL:
+# docker-compose --profile postgres up -d
+#
+# With Redis caching:
+# docker-compose --profile redis up -d
+#
+# Full production setup:
+# docker-compose --profile postgres --profile redis up -d

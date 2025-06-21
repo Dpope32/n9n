@@ -20,16 +20,16 @@ export function HeroSection() {
   return (
     <>
       <div id="overview" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
+        {/* Background Image - FIXED: Made more visible */}
         <div className="absolute inset-0">
           <Image
             src="/interesting.png"
             alt="Background"
             fill
-            className="object-cover opacity-20"
+            className="object-cover opacity-40"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a]/80 via-[#1a1a1a]/60 to-[#1a1a1a]/90" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a]/70 via-[#1a1a1a]/50 to-[#1a1a1a]/80" />
         </div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

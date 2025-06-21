@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import debounce from 'lodash/debounce';
 
@@ -21,9 +21,17 @@ export function useSubscription() {
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const channelRef = useRef<any>(null);
 
   const subscriptionCache = new Map<string, {data: Subscription | null, timestamp: number}>();
   const CACHE_DURATION = 30000; // 30 seconds
+
+  const checkValidSubscription = useCallback((data: Subscription[]): boolean => {
+    return data.some(sub => 
+      ['active', 'trialing'].includes(sub.status) &&
+      new Date(sub.current_period_end) > new Date()
+    );
+  }, []);
 
   const fetchSubscription = useCallback(async () => {
     if (!user?.id) {
@@ -75,16 +83,10 @@ export function useSubscription() {
     }
   }, [user?.id, supabase]);
 
+  // Initial fetch
   useEffect(() => {
     fetchSubscription();
   }, [fetchSubscription]);
-
-  const checkValidSubscription = useCallback((data: Subscription[]): boolean => {
-    return data.some(sub => 
-      ['active', 'trialing'].includes(sub.status) &&
-      new Date(sub.current_period_end) > new Date()
-    );
-  }, []);
 
   const MAX_SYNC_RETRIES = 3;
   const [syncRetries, setSyncRetries] = useState(0);
@@ -123,34 +125,51 @@ export function useSubscription() {
     debouncedSyncWithStripe(subscriptionId);
   }, [debouncedSyncWithStripe]);
 
+  // Real-time subscription - FIXED to prevent multiple subscriptions
   useEffect(() => {
-    if (!user?.id) return;
+    if (!user?.id) {
+      // Clean up any existing channel
+      if (channelRef.current) {
+        channelRef.current.unsubscribe();
+        channelRef.current = null;
+      }
+      return;
+    }
 
-    const channel = supabase
-      .channel(`subscription_updates_${user.id}`)
-      .on(
-        'postgres_changes',
-        {
-          event: 'UPDATE',
-          schema: 'public',
-          table: 'subscriptions',
-          filter: `user_id=eq.${user.id}`
-        },
-        async (payload) => {
-          const isValid = checkValidSubscription([payload.new as Subscription]);
-          setSubscription(isValid ? payload.new as Subscription : null);
-          if (!isValid) {
-            console.log('Subscription expired or invalidated');
+    // Only create channel if we don't have one already
+    if (!channelRef.current) {
+      const channelName = `subscription_updates_${user.id}_${Date.now()}`;
+      
+      channelRef.current = supabase
+        .channel(channelName)
+        .on(
+          'postgres_changes',
+          {
+            event: 'UPDATE',
+            schema: 'public',
+            table: 'subscriptions',
+            filter: `user_id=eq.${user.id}`
+          },
+          async (payload) => {
+            const isValid = checkValidSubscription([payload.new as Subscription]);
+            setSubscription(isValid ? payload.new as Subscription : null);
+            if (!isValid) {
+              console.log('Subscription expired or invalidated');
+            }
           }
-        }
-      )
-      .subscribe();
+        )
+        .subscribe();
+    }
 
     return () => {
-      channel.unsubscribe();
+      if (channelRef.current) {
+        channelRef.current.unsubscribe();
+        channelRef.current = null;
+      }
     };
-  }, [user?.id, checkValidSubscription]);
+  }, [user?.id]); // Removed checkValidSubscription from dependencies
 
+  // Stripe sync effect
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
     

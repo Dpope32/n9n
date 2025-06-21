@@ -15,13 +15,17 @@ const PUBLIC_ROUTES = [
   '/update-password'
 ];
 
+// In development mode, also allow dashboard access
+const IS_DEV = process.env.NODE_ENV === 'development';
+const DEV_PUBLIC_ROUTES = IS_DEV ? [...PUBLIC_ROUTES, '/dashboard'] : PUBLIC_ROUTES;
+
 export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
   // const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!isLoading && !user && !PUBLIC_ROUTES.includes(pathname)) {
+    if (!isLoading && !user && !DEV_PUBLIC_ROUTES.includes(pathname)) {
       const redirectUrl = `/login?redirect=${encodeURIComponent(pathname)}`;
       window.location.assign(redirectUrl);
     }
@@ -38,7 +42,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
   }
 
   // Only render children if we're on a public route or user is authenticated
-  if (PUBLIC_ROUTES.includes(pathname) || user) {
+  if (DEV_PUBLIC_ROUTES.includes(pathname) || user) {
     return <>{children}</>;
   }
 

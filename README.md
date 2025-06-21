@@ -1,128 +1,103 @@
 # N9N: "The Cursor for Automation"
 
-A revolutionary browser extension that brings AI-powered automation building directly to n8n workflows.
+AI-powered automation builder that brings natural language workflow creation directly to n8n.
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Browser Extension](https://img.shields.io/badge/Browser-Extension-orange)
+![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-orange)
+![Docker](https://img.shields.io/badge/Docker-Self--Hosted-blue)
 ![n8n](https://img.shields.io/badge/n8n-Compatible-green)
-![AI Powered](https://img.shields.io/badge/AI-Powered-blue)
 
-## Why n8n IS the Future
+## Two Deployment Options
 
-**Open source = extensible**
-Complete control and unlimited customization possibilities
+**Chrome Extension (Cloud)**
+- Free: 10 AI requests per day  
+- Premium: Unlimited requests ($19/month)
+- Works with any n8n instance
+- Zero setup required
 
-**Self-hosted = no vendor lock-in**
-Your data, your infrastructure, your rules
+**Docker Self-Hosted (Free)**
+- Unlimited usage with your own API keys
+- Complete privacy and control
+- Perfect for self-hosted n8n instances
 
-**Visual + code = appeals to both crowds**
-Drag-and-drop simplicity with code flexibility when needed
+## How It Works
 
-**Growing fast AF**
-Massive community adoption and enterprise momentum
+Highlight any workflow section in n8n, press Ctrl+Shift+A, and describe what you want:
 
-## Revolutionary Browser Extension Idea
+*"Add email validation and send to Slack if invalid"*
 
-Picture this: You're in n8n, you highlight a section and hit a hotkey, an AI chat slides out and you say:
+N9N generates the nodes, connects them, and configures everything automatically.
 
-*"Add a step that takes this webhook data, cleans the email field, and sends it to my CRM if the company size > 50 employees"*
+## Installation
 
-**BAM** - the extension generates the nodes, connects them, configures everything. Cursor for Automation.
+### Chrome Extension
+1. Install from Chrome Web Store (coming soon)
+2. Navigate to your n8n instance  
+3. Use hotkey Ctrl+Shift+A to open AI assistant
 
-## Why Browser Extension Wins
+### Docker Self-Hosted
+```bash
+# Clone and setup
+git clone https://github.com/dpope32/n9n-extension.git
+cd n9n-extension
+cp .env.example .env
 
-**Instant adoption** - works with ANY n8n instance (cloud, self-hosted)
+# Edit environment variables
+# Required: N8N_HOST, OPENAI_API_KEY
 
-**Web app reach** - millions of users, easy install
+# Deploy
+docker-compose up -d
 
-**Revolutionary UX** - AI directly IN the workflow builder
-
-**No n8n dependency** - you're not waiting for them to approve features
-
-## The Vision
-
-You become the AI layer on top of n8n. Every automation builder installs your extension. You're not competing with n8n - you're making it 10x better.
+# Access at http://localhost:3000
+```
 
 ## Features
 
-- **AI-Powered Node Generation**: Describe what you want, get the nodes
-- **Smart Workflow Analysis**: Understands your existing automation context
-- **Universal Compatibility**: Works with any n8n instance
-- **Instant Integration**: No setup required, just install and go
-- **Context-Aware Suggestions**: Learns from your workflow patterns
+- **Natural Language Processing**: Describe workflows in plain English
+- **Smart Context Analysis**: Understands existing automation structure  
+- **Automatic Node Generation**: Creates and connects workflow components
+- **Universal Compatibility**: Works with cloud and self-hosted n8n
+- **Error Prevention**: Validates workflows before insertion
 
+## Why n8n + AI
 
-### Prerequisites
+- **Open Source**: Complete control and unlimited customization
+- **Self-Hosted**: No vendor lock-in, your data stays yours
+- **Visual + Code**: Appeals to both technical and non-technical users
+- **Growing Ecosystem**: Massive community adoption
 
-- Chrome/Firefox browser
-- Access to any n8n instance (cloud or self-hosted)
-- Basic understanding of automation workflows
+## Development
 
-### Installation
+```bash
+# Local development
+npm install
+npm run dev
 
-1. Install the browser extension from the Chrome Web Store
-2. Navigate to your n8n instance
-3. The extension automatically detects n8n and activates
-4. Use the hotkey (Ctrl+Shift+A) to open the AI assistant
+# Docker development  
+docker-compose -f docker-compose.dev.yml up
 
-### Usage
-
-1. **Highlight any workflow section** in your n8n canvas
-2. **Press the hotkey** to open the AI chat
-3. **Describe your automation need** in natural language
-4. **Watch the magic happen** as nodes are generated and connected
-
-## Technical Architecture
-
-### Browser Extension Components
-
-- **Content Script**: Injects into n8n pages and monitors workflow canvas
-- **Background Service**: Handles AI API calls and workflow generation
-- **Popup Interface**: Quick access to settings and features
-- **Context Analyzer**: Understands existing workflow structure
-
-### AI Integration
-
-- **Natural Language Processing**: Converts user requests to workflow logic
-- **Node Template Library**: Pre-built configurations for common automation patterns
-- **Workflow Optimization**: Suggests improvements and best practices
-- **Error Prevention**: Validates generated workflows before insertion
-
-## Development Roadmap
-
-### Phase 1: Core Extension
-- Basic AI chat integration
-- Simple node generation
-- Chrome extension release
-
-### Phase 2: Advanced Features
-- Complex workflow analysis
-- Multi-step automation generation
-- Firefox support
-
-### Phase 3: Enterprise Features
-- Team collaboration tools
-- Custom AI model training
-- Advanced analytics
+# Build Chrome extension
+npm run build:extension
+```
 
 ## Contributing
 
-We welcome contributions from the automation community!
-
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Create feature branch (`git checkout -b feature/NewFeature`)
+3. Commit changes (`git commit -m 'Add NewFeature'`)
+4. Push to branch (`git push origin feature/NewFeature`)
+5. Open Pull Request
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE) file for details.
 
-## Contact
+## Links
 
-Project Link: [https://github.com/dpope32/n9n-extension](https://github.com/dpope32/n9n-extension)
+- **Project**: [https://github.com/dpope32/n9n-extension](https://github.com/dpope32/n9n-extension)
+- **Documentation**: [/docs](/docs)
+- **Issues**: [GitHub Issues](https://github.com/dpope32/n9n-extension/issues)
 
 ---
 
-**N9N: Making automation accessible to everyone, one conversation at a time.**
+**Making automation accessible to everyone, one conversation at a time.**

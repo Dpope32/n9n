@@ -5,13 +5,15 @@ import { TypewriterEffect } from '@/components/TypewriterEffect';
 
 interface CyclingTypewriterProps {
   examples: string[];
-  pauseDuration?: number;
+  typingSpeed?: number; // ms per character
+  readingTime?: number; // ms to read after typing completes
   className?: string;
 }
 
 export function CyclingTypewriter({ 
   examples, 
-  pauseDuration = 3000,
+  typingSpeed = 50,
+  readingTime = 3000,
   className = "" 
 }: CyclingTypewriterProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -20,13 +22,17 @@ export function CyclingTypewriter({
   useEffect(() => {
     if (examples.length <= 1) return;
 
-    const timer = setInterval(() => {
+    const currentText = examples[currentIndex];
+    const typingDuration = currentText.length * typingSpeed;
+    const totalDuration = typingDuration + readingTime;
+
+    const timer = setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % examples.length);
       setKey(prev => prev + 1); // Force remount of TypewriterEffect
-    }, pauseDuration);
+    }, totalDuration);
 
-    return () => clearInterval(timer);
-  }, [examples.length, pauseDuration]);
+    return () => clearTimeout(timer);
+  }, [currentIndex, examples, typingSpeed, readingTime]);
 
   return (
     <div className={className}>

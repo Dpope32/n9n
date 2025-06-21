@@ -11,7 +11,7 @@ AI-powered automation builder that brings natural language workflow creation dir
 ## Two Deployment Options
 
 **Chrome Extension (Cloud)**
-- Free: 10 AI requests per day  
+- Free: 50 AI requests per month  
 - Premium: Unlimited requests ($9/month)
 - Works with any n8n instance
 - Zero setup required

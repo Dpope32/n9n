@@ -29,24 +29,23 @@ const nextConfig: NextConfig = {
     },
   ],
   
-  // Turbopack configuration
+  // Turbopack configuration for dev mode
   experimental: {
     turbo: {
-      // Turbopack handles module warnings differently
-      // The punycode warning is harmless and handled internally
+      // Turbo handles module warnings internally
+      // No need for webpack ignoreWarnings
     },
   },
   
-  // Keep webpack config only for non-turbo builds (production)
-  webpack: (config, { isServer }) => {
-    // Only apply webpack config when NOT using turbo
-    if (process.env.TURBOPACK !== '1') {
+  // Only include webpack config for production builds (no --turbo flag)
+  ...(process.argv.includes('--turbo') ? {} : {
+    webpack: (config, { isServer }) => {
       config.ignoreWarnings = [
         { module: /node_modules\/punycode/ }
       ];
-    }
-    return config;
-  },
+      return config;
+    },
+  }),
 };
 
 export default nextConfig;

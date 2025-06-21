@@ -127,7 +127,8 @@ export function HeroSection() {
                   </div>
                   <CyclingTypewriter 
                     examples={aiExamples}
-                    pauseDuration={4000}
+                    typingSpeed={30}
+                    readingTime={4000}
                     className="text-green-400 font-mono text-lg leading-relaxed"
                   />
                 </div>

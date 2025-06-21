@@ -44,7 +44,9 @@ const nextConfig: NextConfig = {
   ...(process.argv.includes('--turbo') ? {} : {
     webpack: (config, { isServer }) => {
       config.ignoreWarnings = [
-        { module: /node_modules\/punycode/ }
+        { module: /node_modules\/punycode/ },
+        { message: /Critical dependency: the request of a dependency is an expression/ },
+        { module: /node_modules\/@supabase\/realtime-js/ }
       ];
       return config;
     },

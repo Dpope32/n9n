@@ -2,13 +2,33 @@
 
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { Zap, Workflow, Users, Cloud, Star, FileText } from 'lucide-react';
 import { FaChrome } from 'react-icons/fa6';
 import { PricingSection } from '@/components/PricingSection';
 import { HeroSection } from '@/components/HeroSection';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function LandingPage() {
   const router = useRouter();
+  const { user, isLoading } = useAuth();
+
+  // Redirect authenticated users to dashboard
+  useEffect(() => {
+    if (!isLoading && user) {
+      router.push('/dashboard');
+    }
+  }, [user, isLoading, router]);
+
+  // Show loading state if we're checking auth or redirecting authenticated users
+  if (isLoading || user) {
+    return (
+      <div className="min-h-screen flex flex-col space-y-4 items-center justify-center bg-[#0a0a0a]">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#5b64a2]"></div>
+        <div className="text-white">Loading at lightspeed ⚡️</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] relative w-full overflow-x-hidden">

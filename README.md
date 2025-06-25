@@ -1,7 +1,7 @@
 # N9N: 
 ![image](https://github.com/user-attachments/assets/7006dbe5-2477-4623-95ee-dcf7ca4949d1)
 
-AI-powered automation builder that brings natural language workflow creation directly to n8n.
+Autonomous coding agent right in your browser, capable of creating/editing nodes, executing commands, using the browser, and more with your permission every step of the way.
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-orange)
